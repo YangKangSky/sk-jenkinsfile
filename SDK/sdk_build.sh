@@ -282,7 +282,7 @@ main() {
 	esac
 }
 
-main
+main $1
 
 
 
