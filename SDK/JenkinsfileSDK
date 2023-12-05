@@ -1,0 +1,74 @@
+pipeline {
+    agent {
+        label '203.11'
+    }
+
+    stages {
+        stage('Prepare') {
+            steps {
+                script {
+					// 检出代码
+					sh "echo 'shell scripts to Prepare project 1...'"
+					def jenkinsfilePath = pwd()  // 获取当前路径
+					def scriptPath = "${jenkinsfilePath}/SDK/sdk_build.sh"  // 组合路径和脚本名称
+					dir(jenkinsfilePath) {
+						sh "${scriptPath} prepare"
+					}
+                }
+            }
+        }
+	
+        stage('Checkout') {
+            steps {
+                // 检出代码
+                sh "echo 'shell scripts to Checkout project...'"
+		sh "./sdk_build.sh sync"
+            }
+        }
+
+        stage('Build') {
+            steps {
+                // 构建命令
+                sh "echo 'shell scripts to build project...'"
+		sh "./sdk_build.sh build"
+            }
+        }
+
+	stage('Test') {
+            steps {
+                parallel(
+                    "Test Suite 1": {
+                        // 执行测试套件 1
+                        sh "echo 'shell scripts to run Test Suite 1...'"
+                    },
+                    "Test Suite 2": {
+                        // 执行测试套件 2
+                        sh "echo 'shell scripts to run unit Test Suite 2...'"
+                    },
+                    "Test Suite 3": {
+                        // 执行测试套件 3
+                        sh "echo 'shell scripts to run integration Test Suite 3...'"
+                    }
+                )
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                // 部署构建结果
+                // 在此处添加您的部署步骤，如将构建的二进制文件下载到目标设备等
+				sh "echo 'shell scripts to deploy to server...'"
+            }
+        }
+    }
+
+    post {
+        success {
+            echo '构建成功'
+        }
+        failure {
+            echo '构建失败'
+        }
+    }
+}
+
