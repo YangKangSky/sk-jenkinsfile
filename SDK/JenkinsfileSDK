@@ -56,10 +56,11 @@ pipeline {
 					sh "echo 'shell scripts to Prepare project 1...'"
 					def jenkinsfilePath = pwd()  // 获取当前路径
 					def scriptPath = "${jenkinsfilePath}/SDK/sdk_build.sh"  // 组合路径和脚本名称
-						
-					echo  "Prepare:params_list is: ${params_list}"
+					
+					def props = params
+					echo  "Prepare:params_list is: ${props}"
 					dir(jenkinsfilePath) {
-						sh "${scriptPath} prepare ${params_list.join(' ')}"
+						sh "${scriptPath} prepare" ${props}
 					}
                 }
             }
