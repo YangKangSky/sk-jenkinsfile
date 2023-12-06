@@ -29,20 +29,20 @@ pipeline {
 						
 						sh "echo 'shell scripts to Prepare project ...'"
 						def jenkinsfilePath = pwd()  // 获取当前路径
-						def scriptPath = "${jenkinsfilePath}/SDK/test.sh" 
+						def scriptPath = "${jenkinsfilePath}/SDK/sdk_build.sh" 
 						
-						def props = params
-						echo  "Prepare:params_list is: ${props}"
+						//def props = params
+						//echo  "Prepare:params_list is: ${props}"
 						dir(jenkinsfilePath) {
-							//sh "${scriptPath} prepare" ${props}
-							//sh "echo 'run  Prepare...'"test.sh
+							sh "echo 'run  Prepare...'"
 							sh "${scriptPath} prepare"
 						}
 					} catch (err) {
 					    println "Prepare stage execute fail"
-						//currentBuild.result = "UNSTABLE"
-						//throw err
+						currentBuild.result = "UNSTABLE"
 						//currentBuild.result = 'SUCCESS'
+						throw err
+
 					}
 					finally {
 						//currentBuild.result = 'SUCCESS' 
