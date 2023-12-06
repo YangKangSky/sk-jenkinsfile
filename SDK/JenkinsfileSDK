@@ -1,11 +1,48 @@
+def params = {}
+def repo_url
+def repo_manifest
+def repo_branch
+def distro_features
+def target_image
+def build_param
+def use_sstate_cache
+def machine_name
+def patchlist
+	
+
 pipeline {
     agent {
         label '203.11'
     }
 
-
-
     stages {
+		stage('GetParam') {
+		  steps {
+			script {
+				params = properties([])
+				repo_url = params.REPOURL
+				repo_manifest = params.MANIFEST
+				repo_branch = params.BRANCH
+				distro_features = params.DISTRO_FEATURES
+				target_image = params.TARGET_IMAGE
+				build_param = params.BUILD_PARAM
+				use_sstate_cache = params.USE_SSTATE_CACHE
+				machine_name = params.MACHINE_NAME
+				patchlist = params.PATCHLIST
+			  
+				println "repo_url is: ${repo_url}"
+				println "repo_manifest is: ${repo_manifest}"
+				println "repo_branch is: ${repo_branch}"
+				println "distro_features is: ${distro_features}"
+				println "target_image is: ${target_image}"
+				println "build_param is: ${build_param}"
+				println "use_sstate_cache is: ${use_sstate_cache}"
+				println "machine_name is: ${machine_name}"
+				println "patchlist is: ${patchlist}"
+			}
+		  }
+		}
+	
         stage('Prepare') {
             steps {
                 script {
