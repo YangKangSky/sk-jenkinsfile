@@ -294,6 +294,8 @@ main() {
 
 main $1
 
+exit 0
+
 
 
 
