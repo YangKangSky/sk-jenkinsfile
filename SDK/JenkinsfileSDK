@@ -3,26 +3,9 @@ pipeline {
         label '203.11'
     }
 
-	def repo_url = params.REPOURL
-	def repo_manifest = params.MANIFEST
-	def repo_branch = params..BRANCH
-	def distro_features = params.DISTRO_FEATURES
-	def target_image = params.TARGET_IMAGE
-	def build_param = params.BUILD_PARAM
-	def use_sstate_cache = params.USE_SSTATE_CACHE
-	def machine_name = params.MACHINE_NAME
-	def patchlist = params.PATCHLIST
-	
-	def params = [repo_url, repo_manifest, repo_branch, distro_features, target_image, build_param, use_sstate_cache, machine_name, patchlist]
-	println "repo_url is: ${repo_url}"
-	println "repo_manifest is: ${repo_manifest}"
-	println "repo_branch is: ${repo_branch}"
-	println "distro_features is: ${distro_features}"
-	println "target_image is: ${target_image}"
-	println "build_param is: ${build_param}"
-	println "use_sstate_cache is: ${use_sstate_cache}"
-	println "machine_name is: ${machine_name}"
-	println "patchlist is: ${patchlist}"
+	environment {
+		repo_url = parameters.REPOURL
+	}
 
     stages {
         stage('Prepare') {
@@ -30,6 +13,7 @@ pipeline {
                 script {
 					// 准备
 					sh "echo 'shell scripts to Prepare project 1...'"
+					println "repo_url is: ${repo_url}"
 					def jenkinsfilePath = pwd()  // 获取当前路径
 					def scriptPath = "${jenkinsfilePath}/SDK/sdk_build.sh"  // 组合路径和脚本名称
 
@@ -91,7 +75,7 @@ pipeline {
             steps {
                 // 部署构建结果
                 // 在此处添加您的部署步骤，如将构建的二进制文件下载到目标设备等
-				sh "echo 'shell scripts to deploy to server...'"
+                sh "echo 'shell scripts to deploy to server...'"
             }
         }
     }
