@@ -7,11 +7,11 @@ pipeline {
 		stage('GetParams') {
 			steps {
 				script {
-					def params = properties([]) 
+					def props = params
 					echo "Parameters:"
-					params.each { name, value -> 
+					props.each { name, value -> 
 						echo "${name}: ${value}"  
-				  }
+				}
 			}
 		  }
 		}	
