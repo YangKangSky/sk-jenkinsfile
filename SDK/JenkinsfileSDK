@@ -4,6 +4,18 @@ pipeline {
     }
 
     stages {
+		stage('GetParams') {
+		  steps {
+			script {
+			  def params = properties([]) 
+
+			  echo "Parameters:"
+			  params.each { name, value -> 
+				echo "${name}: ${value}"  
+			  }
+			}
+		  }
+		}	
         stage('Prepare') {
             steps {
                 script {
