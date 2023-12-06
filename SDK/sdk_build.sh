@@ -24,6 +24,9 @@ echo "USE_SSTATE_CACHE=${USE_SSTATE_CACHE}"
 echo "DISTRO_FEATURES=${DISTRO_FEATURES}" 
 echo "PATCHLIST=${PATCHLIST}" 
 
+
+exit 0
+
 # 异常处理函数
 function handle_error {
   echo "Error: Command or function failed with exit code $?" >&2

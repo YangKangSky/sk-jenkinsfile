@@ -31,15 +31,11 @@ pipeline {
 						echo  "Prepare:params_list is: ${props}"
 						dir(jenkinsfilePath) {
 							sh "${scriptPath} prepare" ${props}
-							if ($? != 0) {
-								println "Prepare sh execute fail"
-								throw err
-							}
 						}
 					} catch (err) {
 					    println "Prepare stage execute fail"
 						currentBuild.result = "UNSTABLE"
-						throw err 
+						throw err
 					}
                 }
             }
