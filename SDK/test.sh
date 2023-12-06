@@ -12,3 +12,4 @@ echo "DISTRO_FEATURES=${DISTRO_FEATURES}"
 echo "PATCHLIST=${PATCHLIST}"
 
 echo "shell Branch is: ${BRANCH_NAME}"
+exit 0
