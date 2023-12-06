@@ -276,7 +276,7 @@ main() {
 	case $action in
 	"prepare")
 		echo "prepare..."
-		prepare
+		#prepare
 		echo "prepare done..."
 		;;
 	"sync")
