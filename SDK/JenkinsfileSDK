@@ -8,10 +8,10 @@ pipeline {
     stages {
         stage('Prepare') {
             steps {
+                echo "Param in stage repo_url: ${params.repo_url}"  
                 script {
 					// 准备
 					sh "echo 'shell scripts to Prepare project 1...'"
-					echo "Param in stage repo_url: ${params.repo_url}"  
 					def jenkinsfilePath = pwd()  // 获取当前路径
 					def scriptPath = "${jenkinsfilePath}/SDK/sdk_build.sh"  // 组合路径和脚本名称
 
