@@ -15,6 +15,14 @@ export LANG=en_US.UTF-8
 export GIT_SSL_NO_VERIFY=1
 
 
+params_list=("$@")
+
+for param in "${params[@]}"
+do
+  echo "Parameter is: $param" 
+done
+
+
 # 异常处理函数
 function handle_error {
   echo "Error: Command or function failed with exit code $?" >&2

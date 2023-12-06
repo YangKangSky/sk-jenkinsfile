@@ -1,3 +1,4 @@
+def params_list
 def repo_url
 def repo_manifest
 def repo_branch
@@ -8,6 +9,7 @@ def use_sstate_cache
 def machine_name
 def patchlist
 	
+
 
 pipeline {
     agent {
@@ -29,6 +31,7 @@ pipeline {
 					machine_name = params.MACHINE_NAME
 					patchlist = params.PATCHLIST
 
+					params_list = [repo_url, repo_manifest, repo_branch, distro_features, target_image, build_param, use_sstate_cache, machine_name, patchlist]
 					echo  "repo_url is: ${repo_url}"
 					echo  "repo_manifest is: ${repo_manifest}"
 					echo  "repo_branch is: ${repo_branch}"
