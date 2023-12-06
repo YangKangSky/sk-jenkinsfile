@@ -30,7 +30,8 @@ pipeline {
 						def props = params
 						echo  "Prepare:params_list is: ${props}"
 						dir(jenkinsfilePath) {
-							sh "${scriptPath} prepare" ${props}
+							//sh "${scriptPath} prepare" ${props}
+							sh "echo 'run  Prepare...'"
 						}
 					} catch (err) {
 					    println "Prepare stage execute fail"
