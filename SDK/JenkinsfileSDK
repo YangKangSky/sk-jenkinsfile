@@ -37,7 +37,7 @@ pipeline {
 							//sh "${scriptPath} prepare" ${props}
 							//sh "echo 'run  Prepare...'"test.sh
 							//sh "${scriptPath} prepare"
-							sh returnStatus: false, script: '${scriptPath}', args: "prepare"
+							sh returnStatus: false, script: '${scriptPath}'
 						}
 					} catch (err) {
 					    println "Prepare stage execute fail"
