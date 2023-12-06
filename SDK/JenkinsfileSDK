@@ -42,10 +42,10 @@ pipeline {
 					    println "Prepare stage execute fail"
 						//currentBuild.result = "UNSTABLE"
 						//throw err
-						currentBuild.result = 'SUCCESS'
+						//currentBuild.result = 'SUCCESS'
 					}
 					finally {
-						currentBuild.result = 'SUCCESS' 
+						//currentBuild.result = 'SUCCESS' 
 					}
                 }
             }
