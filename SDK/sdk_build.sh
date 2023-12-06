@@ -5,7 +5,7 @@ export PATH=$HOME/user_bin:$PATH
 workdir=$(pwd)
 echo "workdir:$workdir"
 #code_root_dir=$workdir
-code_root_dir=$workdir/jobs
+code_root_dir=$workdir
 mkdir -p $code_root_dir
 echo "code_root_dir:$code_root_dir"
 cd $code_root_dir
