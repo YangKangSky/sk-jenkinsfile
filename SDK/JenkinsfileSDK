@@ -3,15 +3,17 @@ pipeline {
         label '203.11'
     }
 
-	def branch = params.BRANCH
-	
-	println "Branch is: ${branch}"
+
 
     stages {
         stage('Prepare') {
             steps {
                 script {
 					// 准备
+					
+					def branch = params.BRANCH
+					println "Branch is: ${branch}"
+					
 					sh "echo 'shell scripts to Prepare project 1...'"
 					def jenkinsfilePath = pwd()  // 获取当前路径
 					def scriptPath = "${jenkinsfilePath}/SDK/sdk_build.sh"  // 组合路径和脚本名称
