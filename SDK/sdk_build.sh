@@ -14,7 +14,7 @@ export LANG=en_US.UTF-8
 
 export GIT_SSL_NO_VERIFY=1
 
-
+RELEASE_VERSION="default"
 
 
 # 异常处理函数
@@ -201,32 +201,30 @@ bspinfo_get() {
   echo "RELEASE_VERSION: $RELEASE_VERSION"
   echo "MACHINE_NAME: $MACHINE_NAME"
   cd -
-  
 }
 
 
 upload_image() {
 	###upload image
-	case ${BOARD_TYPE} in
-		HY44Q)
-			release_tarball=fetchtv_hy44q_image_`date +%Y%m%d%H%M`.zip
+	case ${MACHINE_NAME} in
+		mesonsc2-5.4-lib32-ah212)
+			release_tarball=amlogic_ah212_${RELEASE_VERSION}_image_`date +%Y%m%d%H%M`.zip
+			ftp_board_path=ah212
 			;;
 		*)
-			echo "Please Select Valid BOARD_TYPE:${BOARD_TYPE} !"
+			echo "Please Select Valid BOARD_TYPE:${MACHINE_NAME} !"
 			exit 1
 			;;
 	esac	
-	
-	#HY44Q
-	ftp_board_path=${BOARD_TYPE}_inner
+
 	###upload image
-	if [ -f tmp/deploy/images/meson*/aml_upgrade_package_ab_dr.img ]; then
-      cd tmp/deploy/images/meson*
-      zip -qrv $release_tarball aml_upgrade_package_ab_dr.img aml_upgrade_package_ab_dr_signed.img  project_version.txt *-u-boot.aml.zip rootfs-debug.tar.gz u-boot.bin.signed u-boot.bin.device.signed recovery.img boot.img rootfs.squashfs  dtb.img logo.img
-      mkdir -p /home/jenkins/workspace/311_image/rdk_fetchtv/nightly/${ftp_board_path}
+	if [ -f ${BUILDDIR}/tmp/deploy/images/meson*/aml_upgrade_package.img ]; then
+      cd ${BUILDDIR}/tmp/deploy/images/meson*
+      zip -qrv $release_tarball aml_upgrade_package.img  project_version.txt *-u-boot.aml.zip  u-boot.bin.signed 
+      mkdir -p /home/jenkins/workspace/311_image/rdk/nightly/${ftp_board_path}
       #upload to 192.168.3.11
-      cp $release_tarball /home/jenkins/workspace/311_image/rdk_fetchtv/nightly/${ftp_board_path} -f
-      echo "The image file will be located at \\\192.168.3.11\Jenkins_image\rdk_fetchtv\nightly\\${ftp_board_path}\\${release_tarball}"
+      cp $release_tarball /home/jenkins/workspace/311_image/rdk/nightly/${ftp_board_path} -f
+      echo "The image file will be located at \\\192.168.3.11\Jenkins_image\rdk\nightly\\${ftp_board_path}\\${release_tarball}"
 
       #upload to 192.168.203.67	
       curl -T $release_tarball ftp://192.168.203.67/Jenkins_image/RDK_platform/${ftp_board_path}/ --user OST:abc.123
@@ -242,9 +240,6 @@ upload_image() {
       exit 1
     fi
 }
-
-
-
 
 
 
@@ -273,6 +268,10 @@ function build() {
 	
 }
 
+function upload() {
+	bspinfo_get
+	upload_image
+}
 
 main() {
 
@@ -299,6 +298,11 @@ main() {
 		echo "build..."
 		build
 		echo "build done..."
+		;;
+	"upload")
+		echo "upload..."
+		upload
+		echo "upload done..."
 		;;
 	*)
 		echo "invalid choice"

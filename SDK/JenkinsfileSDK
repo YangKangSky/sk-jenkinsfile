@@ -79,7 +79,7 @@ pipeline {
             }
         }
 
-	stage('Test') {
+		stage('Test') {
             steps {
                 parallel(
                     "Test Suite 1": {
@@ -97,7 +97,19 @@ pipeline {
                 )
             }
         }
-
+        stage('Upload') {
+            steps {
+                script {
+					// 构建命令
+					sh "echo 'shell scripts to Upload project...'"
+					def jenkinsfilePath = pwd()  // 获取当前路径
+					def scriptPath = "${jenkinsfilePath}/SDK/sdk_build.sh"  // 组合路径和脚本名称
+					dir(jenkinsfilePath) {
+						sh "${scriptPath} upload"
+					}
+                }
+            }
+        }
         stage('Deploy') {
             steps {
                 // 部署构建结果
