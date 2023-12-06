@@ -8,12 +8,12 @@ pipeline {
 			steps {
 				script {
 					params.each() { param, value ->
-					  print "Parameter: ${param}, Value: ${value}"
-					} 
+						print "Parameter: ${param}, Value: ${value}"
+					}
 				}
 			}
 		  }
-		}	
+		}
         stage('Prepare') {
             steps {
                 script {
