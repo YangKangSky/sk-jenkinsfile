@@ -1,14 +1,15 @@
-def params = properties([])
-
 pipeline {
     agent {
         label '203.11'
     }
 
+	def branch = params.BRANCH
+	
+	println "Branch is: ${branch}"
+
     stages {
         stage('Prepare') {
             steps {
-                echo "Param in stage repo_url: ${params.repo_url}"  
                 script {
 					// 准备
 					sh "echo 'shell scripts to Prepare project 1...'"
@@ -73,7 +74,7 @@ pipeline {
             steps {
                 // 部署构建结果
                 // 在此处添加您的部署步骤，如将构建的二进制文件下载到目标设备等
-                sh "echo 'shell scripts to deploy to server...'"
+				sh "echo 'shell scripts to deploy to server...'"
             }
         }
     }
