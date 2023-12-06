@@ -25,13 +25,14 @@ pipeline {
 						
 						sh "echo 'shell scripts to Prepare project ...'"
 						def jenkinsfilePath = pwd()  // 获取当前路径
-						def scriptPath = "${jenkinsfilePath}/SDK/sdk_build.sh" 
+						def scriptPath = "${jenkinsfilePath}/SDK/test.sh" 
 						
 						def props = params
 						echo  "Prepare:params_list is: ${props}"
 						dir(jenkinsfilePath) {
 							//sh "${scriptPath} prepare" ${props}
-							sh "echo 'run  Prepare...'"
+							//sh "echo 'run  Prepare...'"test.sh
+							sh "${scriptPath} prepare" ${props}
 						}
 					} catch (err) {
 					    println "Prepare stage execute fail"

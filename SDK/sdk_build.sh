@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 ###setup env
 export PATH=$HOME/user_bin:$PATH
