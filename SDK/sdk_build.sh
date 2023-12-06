@@ -5,7 +5,7 @@ export PATH=$HOME/user_bin:$PATH
 workdir=$(pwd)
 echo "workdir:$workdir"
 #code_root_dir=$workdir
-code_root_dir=$workdir
+code_root_dir=$workdir/jobs
 mkdir -p $code_root_dir
 echo "code_root_dir:$code_root_dir"
 cd $code_root_dir
@@ -127,6 +127,7 @@ cleanall () {
 	rm -rf $code_root_dir/.templateconf
 	rm -rf $code_root_dir/docs
 	rm -rf $code_root_dir/openembedded-core
+	echo "cleanall done"
 }
 
 
