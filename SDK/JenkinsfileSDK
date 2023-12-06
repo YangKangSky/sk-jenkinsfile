@@ -18,6 +18,7 @@ pipeline {
     stages {
 		stage('GetParam') {
 		  steps {
+			script {
 				params = properties([])
 				repo_url = params.REPOURL
 				repo_manifest = params.MANIFEST
@@ -38,6 +39,7 @@ pipeline {
 				echo  "use_sstate_cache is: ${use_sstate_cache}"
 				echo  "machine_name is: ${machine_name}"
 				echo  "patchlist is: ${patchlist}"
+			}
 		  }
 		}
 	
