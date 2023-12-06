@@ -5,14 +5,13 @@ pipeline {
 
     stages {
 		stage('GetParams') {
-		  steps {
-			script {
-			  def params = properties([]) 
-
-			  echo "Parameters:"
-			  params.each { name, value -> 
-				echo "${name}: ${value}"  
-			  }
+			steps {
+				script {
+					def params = properties([]) 
+					echo "Parameters:"
+					params.each { name, value -> 
+						echo "${name}: ${value}"  
+				  }
 			}
 		  }
 		}	
