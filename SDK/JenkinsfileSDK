@@ -32,14 +32,15 @@ pipeline {
 						dir(jenkinsfilePath) {
 							//sh "${scriptPath} prepare" ${props}
 							//sh "echo 'run  Prepare...'"test.sh
-							OUTPUT = sh returnStdout: true,
-								script:"${scriptPath} prepare" ${props}
-							echo "OUTPUT=${echo OUTPUT}"
+							sh "${scriptPath} prepare" ${props}
 						}
 					} catch (err) {
 					    println "Prepare stage execute fail"
 						currentBuild.result = "UNSTABLE"
 						throw err
+					}
+					finally {
+						currentBuild.result = 'SUCCESS' 
 					}
                 }
             }
