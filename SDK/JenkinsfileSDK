@@ -3,6 +3,27 @@ pipeline {
         label '203.11'
     }
 
+	def repo_url = params.REPOURL
+	def repo_manifest = params.MANIFEST
+	def repo_branch = params..BRANCH
+	def distro_features = params.DISTRO_FEATURES
+	def target_image = params.TARGET_IMAGE
+	def build_param = params.BUILD_PARAM
+	def use_sstate_cache = params.USE_SSTATE_CACHE
+	def machine_name = params.MACHINE_NAME
+	def patchlist = params.PATCHLIST
+	
+	def params = [repo_url, repo_manifest, repo_branch, distro_features, target_image, build_param, use_sstate_cache, machine_name, patchlist]
+	println "repo_url is: ${repo_url}"
+	println "repo_manifest is: ${repo_manifest}"
+	println "repo_branch is: ${repo_branch}"
+	println "distro_features is: ${distro_features}"
+	println "target_image is: ${target_image}"
+	println "build_param is: ${build_param}"
+	println "use_sstate_cache is: ${use_sstate_cache}"
+	println "machine_name is: ${machine_name}"
+	println "patchlist is: ${patchlist}"
+
     stages {
         stage('Prepare') {
             steps {
@@ -11,8 +32,7 @@ pipeline {
 					sh "echo 'shell scripts to Prepare project 1...'"
 					def jenkinsfilePath = pwd()  // 获取当前路径
 					def scriptPath = "${jenkinsfilePath}/SDK/sdk_build.sh"  // 组合路径和脚本名称
-					def branch = params.branch
-					println "Branch is: ${branch}"
+
 					dir(jenkinsfilePath) {
 						sh "${scriptPath} prepare"
 					}
