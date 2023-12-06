@@ -3,6 +3,10 @@ pipeline {
         label '203.11'
     }
 
+    environment {
+        BRANCH_NAME = "${BRANCH}"
+    }
+
     stages {
 		stage('GetParams') {
 			steps {
@@ -21,7 +25,7 @@ pipeline {
 					// 准备
 					try {				
 						//def branch = params.BRANCH
-						//println "Branch is: ${branch}"
+						println "Branch is: ${BRANCH_NAME}"
 						
 						sh "echo 'shell scripts to Prepare project ...'"
 						def jenkinsfilePath = pwd()  // 获取当前路径
