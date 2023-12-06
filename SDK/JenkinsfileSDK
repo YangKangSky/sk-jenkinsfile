@@ -43,8 +43,8 @@ pipeline {
 						currentBuild.result = 'SUCCESS' 
 					}
                 }
+                stageResult 'SUCCESS'
             }
-			stageResult 'SUCCESS'
         }
 	
         stage('Checkout') {
