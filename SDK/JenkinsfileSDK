@@ -48,7 +48,6 @@ pipeline {
 						currentBuild.result = 'SUCCESS' 
 					}
                 }
-                stageResult 'SUCCESS'
             }
         }
 	
