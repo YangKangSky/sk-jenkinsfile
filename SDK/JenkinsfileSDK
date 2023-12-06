@@ -59,7 +59,7 @@ pipeline {
 					def jenkinsfilePath = pwd()  // 获取当前路径
 					def scriptPath = "${jenkinsfilePath}/SDK/sdk_build.sh"  // 组合路径和脚本名称
 					dir(jenkinsfilePath) {
-						sh "${scriptPath} sync" ${props}
+						sh "${scriptPath} sync"
 					}
                 }
             }
@@ -73,7 +73,7 @@ pipeline {
 					def jenkinsfilePath = pwd()  // 获取当前路径
 					def scriptPath = "${jenkinsfilePath}/SDK/sdk_build.sh"  // 组合路径和脚本名称
 					dir(jenkinsfilePath) {
-						sh "${scriptPath} build" ${props}
+						sh "${scriptPath} build"
 					}
                 }
             }
