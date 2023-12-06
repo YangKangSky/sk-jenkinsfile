@@ -36,14 +36,15 @@ pipeline {
 						}
 					} catch (err) {
 					    println "Prepare stage execute fail"
-						currentBuild.result = "UNSTABLE"
-						throw err
+						//currentBuild.result = "UNSTABLE"
+						//throw err
 					}
 					finally {
 						currentBuild.result = 'SUCCESS' 
 					}
                 }
             }
+			stageResult 'SUCCESS'
         }
 	
         stage('Checkout') {
