@@ -5,7 +5,7 @@ export PATH=$HOME/user_bin:$PATH
 workdir=$(pwd)
 echo "workdir:$workdir"
 #code_root_dir=$workdir
-code_root_dir=$workdir
+code_root_dir=$workdir/WORKDIR
 mkdir -p $code_root_dir
 echo "code_root_dir:$code_root_dir"
 cd $code_root_dir
@@ -28,6 +28,7 @@ trap handle_error ERR
 
 
 evn_prepare() {
+	cd ${code_root_dir}
 	if [ ! -d $code_root_dir/downloads ];then
 		echo "ln -sf  /home/jenkins/workspace/rdk_downloads $code_root_dir/downloads"
         ln -sf  /home/jenkins/workspace/rdk_downloads $code_root_dir/downloads
@@ -41,7 +42,8 @@ evn_prepare() {
 	echo "REPOURL=${REPOURL}" 
 	echo "USE_SSTATE_CACHE=${USE_SSTATE_CACHE}" 
 	echo "DISTRO_FEATURES=${DISTRO_FEATURES}" 
-	echo "PATCHLIST=${PATCHLIST}" 
+	echo "PATCHLIST=${PATCHLIST}"
+	cd -	
 }
 
 patch_for_hdcp() {
@@ -79,6 +81,7 @@ patch_for_dolbyms12() {
 }
 
 apply_patch() {
+	cd ${code_root_dir}
 	echo "PATCHLIST is $PATCHLIST"
     #PATCHLIST="HDCP,NETFLIX,AMAZON,BOOTLOADER,DOLBYVISION,DOLBYMS12"
     IFS=',' read -ra PATCHES <<< "$PATCHLIST"
@@ -117,6 +120,7 @@ apply_patch() {
           ;;
       esac
     done
+	cd -
 }
 
 cleanall () {
@@ -135,6 +139,7 @@ cleanall () {
 
 
 sync_project() {
+	cd ${code_root_dir}
 	echo "Starting repo init: repo init -u $REPOURL -b $BRANCH -m $MANIFEST"
 	echo $PATH
 	export PATH=$HOME/bin:$PATH
@@ -145,12 +150,14 @@ sync_project() {
     
     git clone "ssh://gerrit01.sdt.com:29418/RDK/meta-skyworth-licenses"
     echo "meta-skyworth-licenses sync completed"
+	cd -
 }
 
 
 
 
 build_project() {
+	cd ${code_root_dir}
 	echo "Starting bitbake build"
 	export LOCAL_BUILD=1
 
@@ -165,13 +172,14 @@ build_project() {
 
 	echo "bitbake $TARGET_IMAGE"
 	bitbake $TARGET_IMAGE
+	cd -
 }
 
 
 version_record() {
-    MACHINE_TYPE=$(ls -1 ${code_root_dir}/build/tmp/deploy/images/)
-    BUILD_DIR=$(dirname ${code_root_dir}/build)
-    BUILD_DIR_BASE=$(basename ${code_root_dir}/build)
+    MACHINE_TYPE=$(ls -1 ${BUILDDIR}/tmp/deploy/images/)
+    BUILD_DIR=$(dirname ${BUILDDIR})
+    BUILD_DIR_BASE=$(basename ${BUILDDIR})
     BUILD_DIR=${BUILD_DIR}/${BUILD_DIR_BASE}
 
 	rm -rf ${BUILD_DIR}/tmp/deploy/images/${MACHINE_TYPE}/project_version.txt
@@ -185,7 +193,7 @@ version_record() {
 
 bspinfo_get() {
   # 从auto.conf文件获取RDKM_MANIFEST_DATETIME和RELEASE_VERSION的值
-  cd ${code_root_dir}/build
+  cd ${BUILDDIR}/
   RDKM_MANIFEST_DATETIME=$(grep -oP 'RDKM_MANIFEST_DATETIME\s*=\s*"\K[^"]+' auto.conf)
   RELEASE_VERSION=$(grep -oP 'RELEASE_VERSION\s*=\s*"\K[^"]+' auto.conf)
   
