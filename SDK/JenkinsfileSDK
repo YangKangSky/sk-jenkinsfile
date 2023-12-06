@@ -7,6 +7,7 @@ pipeline {
 		stage('GetParams') {
 			steps {
 				script {
+					sh "echo 'shell scripts to GetParams project ...'"
 					params.each() { param, value ->
 						print "Parameter: ${param}, Value: ${value}"
 					}
@@ -19,18 +20,17 @@ pipeline {
                 script {
 					// 准备
 					
-					def branch = params.BRANCH
-					println "Branch is: ${branch}"
+					//def branch = params.BRANCH
+					//println "Branch is: ${branch}"
 					
 					sh "echo 'shell scripts to Prepare project ...'"
 					def jenkinsfilePath = pwd()  // 获取当前路径
-					def scriptPath = "${jenkinsfilePath}/SDK/sdk_build.sh"  // 组合路径和脚本名称
+					def scriptPath = "${jenkinsfilePath}/SDK/sdk_build.sh" 
 					
 					def props = params
 					echo  "Prepare:params_list is: ${props}"
 					dir(jenkinsfilePath) {
 						sh "${scriptPath} prepare" ${props}
-						//sh script: "${scriptPath} prepare", env: props
 					}
                 }
             }
@@ -44,7 +44,7 @@ pipeline {
 					def jenkinsfilePath = pwd()  // 获取当前路径
 					def scriptPath = "${jenkinsfilePath}/SDK/sdk_build.sh"  // 组合路径和脚本名称
 					dir(jenkinsfilePath) {
-						sh "${scriptPath} sync"
+						sh "${scriptPath} sync" ${props}
 					}
                 }
             }
@@ -58,7 +58,7 @@ pipeline {
 					def jenkinsfilePath = pwd()  // 获取当前路径
 					def scriptPath = "${jenkinsfilePath}/SDK/sdk_build.sh"  // 组合路径和脚本名称
 					dir(jenkinsfilePath) {
-						sh "${scriptPath} build"
+						sh "${scriptPath} build" ${props}
 					}
                 }
             }
