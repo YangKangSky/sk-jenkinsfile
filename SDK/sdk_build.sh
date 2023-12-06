@@ -14,18 +14,8 @@ export LANG=en_US.UTF-8
 
 export GIT_SSL_NO_VERIFY=1
 
-echo "MANIFEST=${MANIFEST}" 
-echo "BRANCH=${BRANCH}"
-echo "MACHINE_NAME=${MACHINE_NAME}" 
-echo "TARGET_IMAGE=${TARGET_IMAGE}" 
-echo "BUILD_PARAM=${BUILD_PARAM}" 
-echo "REPOURL=${REPOURL}" 
-echo "USE_SSTATE_CACHE=${USE_SSTATE_CACHE}" 
-echo "DISTRO_FEATURES=${DISTRO_FEATURES}" 
-echo "PATCHLIST=${PATCHLIST}" 
 
 
-exit 0
 
 # 异常处理函数
 function handle_error {
@@ -42,6 +32,16 @@ evn_prepare() {
 		echo "ln -sf  /home/jenkins/workspace/rdk_downloads $code_root_dir/downloads"
         ln -sf  /home/jenkins/workspace/rdk_downloads $code_root_dir/downloads
 	fi
+	
+	echo "MANIFEST=${MANIFEST}" 
+	echo "BRANCH=${BRANCH}"
+	echo "MACHINE_NAME=${MACHINE_NAME}" 
+	echo "TARGET_IMAGE=${TARGET_IMAGE}" 
+	echo "BUILD_PARAM=${BUILD_PARAM}" 
+	echo "REPOURL=${REPOURL}" 
+	echo "USE_SSTATE_CACHE=${USE_SSTATE_CACHE}" 
+	echo "DISTRO_FEATURES=${DISTRO_FEATURES}" 
+	echo "PATCHLIST=${PATCHLIST}" 
 }
 
 patch_for_hdcp() {
