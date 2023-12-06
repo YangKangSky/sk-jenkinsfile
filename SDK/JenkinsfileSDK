@@ -59,7 +59,7 @@ pipeline {
 						
 					echo  "Prepare:params_list is: ${params_list}"
 					dir(jenkinsfilePath) {
-						sh "${scriptPath} prepare ${params_list}"
+						sh "${scriptPath} prepare ${params_list.join(' ')}"
 					}
                 }
             }
