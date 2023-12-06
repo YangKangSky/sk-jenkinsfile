@@ -1,11 +1,9 @@
+def params = properties([])
+
 pipeline {
     agent {
         label '203.11'
     }
-
-	environment {
-		repo_url = parameters.REPOURL
-	}
 
     stages {
         stage('Prepare') {
@@ -13,7 +11,7 @@ pipeline {
                 script {
 					// 准备
 					sh "echo 'shell scripts to Prepare project 1...'"
-					println "repo_url is: ${repo_url}"
+					echo "Param in stage repo_url: ${params.repo_url}"  
 					def jenkinsfilePath = pwd()  // 获取当前路径
 					def scriptPath = "${jenkinsfilePath}/SDK/sdk_build.sh"  // 组合路径和脚本名称
 
