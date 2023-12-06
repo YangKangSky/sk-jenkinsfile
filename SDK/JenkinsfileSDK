@@ -41,8 +41,6 @@ pipeline {
 					echo  "use_sstate_cache is: ${use_sstate_cache}"
 					echo  "machine_name is: ${machine_name}"
 					echo  "patchlist is: ${patchlist}"
-
-
                 }
             }
         }
@@ -60,7 +58,7 @@ pipeline {
 					def scriptPath = "${jenkinsfilePath}/SDK/sdk_build.sh"  // 组合路径和脚本名称
 
 					dir(jenkinsfilePath) {
-						sh "${scriptPath} prepare"
+						sh "${scriptPath} prepare ${patchlist}"
 					}
                 }
             }

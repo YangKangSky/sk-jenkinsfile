@@ -17,6 +17,7 @@ export GIT_SSL_NO_VERIFY=1
 
 params_list=("$@")
 
+echo "params_list is: $params_list" 
 for param in "${params[@]}"
 do
   echo "Parameter is: $param" 
