@@ -57,9 +57,9 @@ pipeline {
 					def jenkinsfilePath = pwd()  // 获取当前路径
 					def scriptPath = "${jenkinsfilePath}/SDK/sdk_build.sh"  // 组合路径和脚本名称
 						
-					echo  "Prepare:patchlist is: ${patchlist}"
+					echo  "Prepare:params_list is: ${params_list}"
 					dir(jenkinsfilePath) {
-						sh "${scriptPath} prepare ${patchlist}"
+						sh "${scriptPath} prepare ${params_list}"
 					}
                 }
             }
