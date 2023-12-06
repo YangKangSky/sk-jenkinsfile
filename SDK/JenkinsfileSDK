@@ -15,6 +15,39 @@ pipeline {
     }
 
     stages {
+        stage('GetParam') {
+            steps {
+                script {
+					// 准备
+					
+					def branch = params.BRANCH
+					println "Branch is: ${branch}"
+					
+					repo_url = params.REPOURL
+					repo_manifest = params.MANIFEST
+					repo_branch = params.BRANCH
+					distro_features = params.DISTRO_FEATURES
+					target_image = params.TARGET_IMAGE
+					build_param = params.BUILD_PARAM
+					use_sstate_cache = params.USE_SSTATE_CACHE
+					machine_name = params.MACHINE_NAME
+					patchlist = params.PATCHLIST
+
+					echo  "repo_url is: ${repo_url}"
+					echo  "repo_manifest is: ${repo_manifest}"
+					echo  "repo_branch is: ${repo_branch}"
+					echo  "distro_features is: ${distro_features}"
+					echo  "target_image is: ${target_image}"
+					echo  "build_param is: ${build_param}"
+					echo  "use_sstate_cache is: ${use_sstate_cache}"
+					echo  "machine_name is: ${machine_name}"
+					echo  "patchlist is: ${patchlist}"
+
+
+                }
+            }
+        }
+	
         stage('Prepare') {
             steps {
                 script {
