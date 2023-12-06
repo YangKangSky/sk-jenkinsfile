@@ -277,14 +277,17 @@ main() {
 	"prepare")
 		echo "prepare..."
 		prepare
+		echo "prepare done..."
 		;;
 	"sync")
 		echo "sync..."
 		sync
+		echo "sync done..."
 		;;
 	"build")
 		echo "build..."
 		build
+		echo "build done..."
 		;;
 	*)
 		echo "invalid choice"
