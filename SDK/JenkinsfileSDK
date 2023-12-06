@@ -61,6 +61,7 @@ pipeline {
 					echo  "Prepare:params_list is: ${props}"
 					dir(jenkinsfilePath) {
 						sh "${scriptPath} prepare" ${props}
+						sh script: "${scriptPath} prepare", env: props
 					}
                 }
             }

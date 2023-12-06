@@ -23,6 +23,7 @@ do
   echo "Parameter is: $param" 
 done
 
+echo "MANIFEST is ${MANIFEST}"
 
 # 异常处理函数
 function handle_error {
