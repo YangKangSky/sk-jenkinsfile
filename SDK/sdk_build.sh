@@ -198,8 +198,8 @@ version_record() {
 bspinfo_get() {
   # 从auto.conf文件获取RDKM_MANIFEST_DATETIME和RELEASE_VERSION的值
   cd ${BUILDDIR}/
-  RDKM_MANIFEST_DATETIME=$(grep -oP 'RDKM_MANIFEST_DATETIME\s*=\s*"\K[^"]+' ${BUILDDIR}/conf/auto.conf)
-  RELEASE_VERSION=$(grep -oP 'RELEASE_VERSION\s*=\s*"\K[^"]+' ${BUILDDIR}/conf/auto.conf)
+  RDKM_MANIFEST_DATETIME=$(grep -oP 'RDKM_MANIFEST_DATETIME\s*=\s*"\K[^"]+' ${code_root_dir}/build*/conf/auto.conf)
+  RELEASE_VERSION=$(grep -oP 'RELEASE_VERSION\s*=\s*"\K[^"]+' ${code_root_dir}/build*/conf/auto.conf)
   
   echo "RDKM_MANIFEST_DATETIME: $RDKM_MANIFEST_DATETIME"
   echo "RELEASE_VERSION: $RELEASE_VERSION"
