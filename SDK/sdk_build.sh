@@ -171,7 +171,7 @@ build_project() {
     sed -i '/BB_NUMBER_THREADS = "4"\|PARALLEL_MAKE = "-j 4"/d' conf/local.conf 
 
 	echo "bitbake $TARGET_IMAGE"
-	bitbake $TARGET_IMAGE
+	#bitbake $TARGET_IMAGE
 	cd -
 }
 
@@ -184,11 +184,15 @@ version_record() {
 
 	rm -rf ${BUILD_DIR}/tmp/deploy/images/${MACHINE_TYPE}/project_version.txt
     
+	cd ${code_root_dir}
     echo "meta layers version info:" > ${BUILD_DIR}/tmp/deploy/images/${MACHINE_TYPE}/project_version.txt
 	repo info >>  ${BUILD_DIR}/tmp/deploy/images/${MACHINE_TYPE}/project_version.txt
-    
+    cd -
+	
+	cd ${BUILDDIR}/
     echo "recipe source version info:" >> ${BUILD_DIR}/tmp/deploy/images/${MACHINE_TYPE}/project_version.txt
     buildhistory-collect-srcrevs -a >>  ${BUILD_DIR}/tmp/deploy/images/${MACHINE_TYPE}/project_version.txt
+	cd -
 }
 
 bspinfo_get() {
@@ -248,7 +252,7 @@ function prepare() {
 	evn_prepare
 
 	#remove build and meta files
-    cleanall
+    #cleanall
 }
 
 function sync() {
