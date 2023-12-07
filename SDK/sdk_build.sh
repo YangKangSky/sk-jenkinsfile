@@ -6,6 +6,7 @@ workdir=$(pwd)
 echo "workdir:$workdir"
 #code_root_dir=$workdir
 code_root_dir=$workdir/WORKDIR
+BUILDDIR=${code_root_dir}/build*
 mkdir -p $code_root_dir
 echo "code_root_dir:$code_root_dir"
 cd $code_root_dir
